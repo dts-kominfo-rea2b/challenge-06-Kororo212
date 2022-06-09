@@ -23,7 +23,7 @@ const bacaData = (fnCallback) => {
     let result = [];
 
     fileList.forEach(item => {
-        const processItem = new Promise((resolve, reject) => {
+        const processing = new Promise((resolve, reject) => {
             fs.readFile(item, (error, data) => {
                 // error state
                 if (error) {
@@ -35,14 +35,11 @@ const bacaData = (fnCallback) => {
                 resolve(proses);
             })
         })
-        result.push(processItem);
+        result.push(processing);
     })
     Promise.all(result).then(values => {
         fnCallback(null, values)
-    }).catch(error => {
-        fnCallback(error, null)
     });
-
 }
 const processData = (data) => {
     const dataa = JSON.parse(data);
